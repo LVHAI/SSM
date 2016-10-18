@@ -25,10 +25,11 @@ public class RegiesterServiceimpl implements RegiesterService{
     @Autowired
     public UserDao userDao;
 
-    public int register(String userName, String passWord, String nickName) {
+    public int register(String userName, String passWord, String token) {
         User user = new User();
         user.setName(userName);
         user.setPassword(passWord);
+        user.setToken(token);
         return this.userDao.insertSelective(user);
     }
 

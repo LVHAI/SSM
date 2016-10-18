@@ -5,12 +5,14 @@ import com.josh.login.dao.UserDao;
 import com.josh.login.entity.User;
 import com.josh.login.service.RegiesterService;
 import com.josh.utils.ContextUtils;
+import com.josh.utils.UUIDGenerate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.support.RequestContext;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,12 +31,13 @@ public class UserController extends BaseController{
     @Autowired
     private RegiesterService regiesterService;
 
-    @RequestMapping(value="/Register",method= RequestMethod.GET)
+    @RequestMapping(value="/regiest",method= RequestMethod.POST)
     public void register(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String userName = (String) request.getParameter("name");
-        String passWord = (String) request.getParameter("pwd");
+        String userName = (String) request.getParameter("userName");
+        String passWord = (String) request.getParameter("password");
+        String token = UUIDGenerate.getUUID();
 
-        int code = regiesterService.register(userName, passWord, "");
+        int code = regiesterService.register(userName, passWord, token);
         System.out.println("�����codeΪ" + code);
 
         List<User> users = new ArrayList<User>();
@@ -66,5 +69,11 @@ public class UserController extends BaseController{
 
         System.out.println("GET ALL LIST");
         return "showAll";
+    }
+
+    @RequestMapping(value = "/register",method = RequestMethod.GET)
+    public String gotoRegiester(){
+        System.out.println("gotoRegiester");
+        return "regiest";
     }
 }

@@ -9,6 +9,6 @@ import java.util.List;
  */
 public interface RegiesterService {
 
-    public int register(String userName, String passWord, String nickName);
+    public int register(String userName, String passWord, String token);
     public List<User> getAll();
 }
