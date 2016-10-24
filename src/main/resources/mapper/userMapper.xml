@@ -87,4 +87,8 @@
         SELECT id ,userName,password,token FROM t_user
     </select>
 
+    <select id="getAllUser" resultMap="java.lang.Integer">
+        SELECT COUNT(*) FROM t_user WHERE userName=13926283235
+    </select>
+
 </mapper>

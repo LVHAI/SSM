@@ -1,18 +1,13 @@
 package com.josh.login.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.josh.login.dao.UserDao;
 import com.josh.login.entity.User;
 import com.josh.login.service.RegiesterService;
-import com.josh.utils.ContextUtils;
 import com.josh.utils.UUIDGenerate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.support.RequestContext;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,7 +33,6 @@ public class UserController extends BaseController{
         String token = UUIDGenerate.getUUID();
 
         int code = regiesterService.register(userName, passWord, token);
-        System.out.println("�����codeΪ" + code);
 
         List<User> users = new ArrayList<User>();
         users = regiesterService.getAll();
@@ -60,7 +54,6 @@ public class UserController extends BaseController{
         String userName = (String) req.getAttribute("uname");
         String passWord = (String) req.getAttribute("upwd");
 
-        System.out.println("�����userNameΪ" + userName + "\n�����passWordΪ" + passWord);
 
     }
 
